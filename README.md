@@ -1,53 +1,45 @@
-# CakePHP Application Skeleton
+# BBSZ
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
-
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
-
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
-
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
-
+- マイグレーションファイル作成
 ```bash
-composer create-project --prefer-dist cakephp/app
+bin/cake bake migration CreateProducts name:string description:text created modified
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
+- マイグレーション実行
 ```bash
-composer create-project --prefer-dist cakephp/app myapp
+bin/cake migrations migrate
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
+- マイグレーションロールバック
 ```bash
-bin/cake server -p 8765
+bin/cake migrations rollback
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+- シーダーファイル作成
+```bash
+bin/phinx seed:create UserSeeder
+```
 
-## Update
+- シード実行
+```bash
+bin/cake migrations seed
+```
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
 
-## Configuration
 
-Read and edit the environment specific `config/app_local.php` and setup the 
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
 
-## Layout
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+
+
+
+
+
+git config --global user.name "Shoichiro KANNO"
+git config --global user.email "s-kanno@qb3.so-net.ne.jp"
+git config --global core.editor 'vim -c "set fenc=utf-8"'
+git config --global core.autocrlf false
+git config --global core.quotepath false
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+git config --global alias.logs "log --decorate --graph --branches --tags --remotes"
