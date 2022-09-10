@@ -1,8 +1,14 @@
-<?php foreach ($topCategories as $topCategory): ?>
-    <h2><?= $topCategory->name ?></h2>
-    <ul>
-        <?php foreach ($topCategory->categories as $category): ?>
-            <li><a href="<?= $topCategory->id ?>/<?= $category->id ?>"><?= $category->name ?></a></li>
-        <?php endforeach ?>
-    </ul>
-<?php endforeach ?>
+<div class="row">
+    <?php foreach ($topCategories as $topCategory): ?>
+        <div class="col-3">
+            <h3 class="m-2"><?= $topCategory->name ?></h3>
+            <ul class="list-group">
+                <?php foreach ($topCategory->categories as $category): ?>
+                    <li class="list-group-item">
+                        <a href="/<?= $category->id ?>"><?= $category->name ?></a> (<?= count($category->boards) ?>)
+                    </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    <?php endforeach ?>
+</div>

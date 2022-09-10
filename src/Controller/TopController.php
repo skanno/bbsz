@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Cache\Cache;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -19,8 +20,15 @@ class TopController extends AppController
      */
     public function index()
     {
-        $topCategories = TableRegistry::getTableLocator()->get('TopCategories');
-        $topCategories = $topCategories->find()->contain(['Categories'])->all();
+        $cacheKey = 'top_categories';
+        $topCategories = Cache::read($cacheKey, 'top_categories');
+        if (!$topCategories) {
+            $topCategories = TableRegistry::getTableLocator()->get('TopCategories');
+            $topCategories = $topCategories->find()
+                ->contain(['Categories.Boards'])
+                ->all();
+            Cache::write($cacheKey, $topCategories, 'top_categories');
+        }
         $this->set(compact('topCategories'));
     }
 }

@@ -23,29 +23,31 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
+    <?= $this->Html->css('BootstrapUI.bootstrap.min') ?>
+    <?= $this->Html->css(['BootstrapUI./font/bootstrap-icons', 'BootstrapUI./font/bootstrap-icon-sizes']) ?>
+    <?= $this->Html->script(['BootstrapUI.popper.min', 'BootstrapUI.bootstrap.min']) ?>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>">BBSZ</a>
+<body class="container">
+    <header class="header text-center p-5">
+        <div>
+            <h1 class="display-1">BBSZ</h1>
         </div>
-        <div class="top-nav-links">
-            <!--a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a -->
-            <!--a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a -->
-        </div>
-    </nav>
+    </header>
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <footer>
+    <footer class="footer text-center p-4">
+        <hr>
+        <div>
+            <p class="text-muted">Copyright &copy; bbsz.s-kanno.net All Rights Reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

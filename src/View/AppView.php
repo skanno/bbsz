@@ -35,8 +35,22 @@ class AppView extends UIView
      *
      * @return void
      */
+    //public function initialize(): void
+    //{
+    //    parent::initialize();
+    //    dd($this);
+    //}
+
+    /**
+     * Initialization hook method.
+     *
+     * @return void
+     */
     public function initialize(): void
     {
         parent::initialize();
+
+        $this->initializeUI(['layout' => 'default']);
     }
+
 }
