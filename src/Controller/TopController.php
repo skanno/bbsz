@@ -21,13 +21,13 @@ class TopController extends AppController
     public function index()
     {
         $cacheKey = 'top_categories';
-        $topCategories = Cache::read($cacheKey, 'top_categories');
+        $topCategories = Cache::read($cacheKey, 'redis');
         if (!$topCategories) {
             $topCategories = TableRegistry::getTableLocator()->get('TopCategories');
             $topCategories = $topCategories->find()
                 ->contain(['Categories.Boards'])
                 ->all();
-            Cache::write($cacheKey, $topCategories, 'top_categories');
+            Cache::write($cacheKey, $topCategories, 'redis');
         }
         $this->set(compact('topCategories'));
     }

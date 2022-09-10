@@ -1,6 +1,7 @@
 <?php
 
 use Cake\Cache\Engine\FileEngine;
+use Cake\Cache\Engine\RedisEngine;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Cake\Log\Engine\FileLog;
@@ -145,12 +146,13 @@ return [
             'url' => env('CACHE_CAKEROUTES_URL', null),
         ],
 
-        'top_categories' => [
-            'className' => FileEngine::class,
-            'path' => CACHE,
+        'redis' => [
+            'className' => RedisEngine::class,
             'duration' => '+1 hours',
-            'serialize' => true,
-            'url' => env('CACHE_DEFAULT_URL', null),
+            'prefix' => 'cake_redis_',
+            'host' => 'redis',
+            'port' => 6379,
+            'fallback' => 'default',
         ],
     ],
 
