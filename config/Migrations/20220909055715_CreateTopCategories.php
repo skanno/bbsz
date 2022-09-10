@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Migrations\AbstractMigration;
 
-class CreateCategories extends AbstractMigration
+class CreateTopCategories extends AbstractMigration
 {
     /**
      * Change Method.
@@ -14,11 +14,8 @@ class CreateCategories extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('categories');
+        $table = $this->table('top_categories');
 
-        $table->addColumn('top_category_id', 'integer', [
-            'null' => true,
-        ]);
         $table->addColumn('name', 'string', [
             'default' => null,
             'limit' => 255,
@@ -35,11 +32,6 @@ class CreateCategories extends AbstractMigration
         $table->addColumn('modified', 'datetime', [
             'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
-        ]);
-
-        $table->addForeignKey('top_category_id', 'top_categories', 'id', [
-            'delete' => 'cascade',
-            'update' => 'cascade',
         ]);
 
         $table->create();
