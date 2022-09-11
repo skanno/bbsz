@@ -14,7 +14,7 @@
                     echo $this->Form->control('description', ['label' => '説明']);
                 ?>
             </fieldset>
-            <?= $this->Form->button('作成') ?>
+            <?= $this->Form->button('作成', ['class' => 'btn btn-primary']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
