@@ -25,6 +25,10 @@
     </header>
     <main class="main">
         <div class="container">
+            <?= $this->Breadcrumbs->render(
+                ['class' => 'breadcrumbs-trail'],
+                ['separator' => '<i class="fa fa-angle-right"></i>']
+            ) ?>
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>

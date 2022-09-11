@@ -1,5 +1,11 @@
+<?php
+$this->Breadcrumbs->add([
+    ['title' => 'ホーム', 'url' => '/'],
+    ['title' => h($category->name), 'url' => null],
+]);
+?>
 <div class="boards index content">
-    <?= $this->Html->link('新しい板を作る', ['action' => 'add', $categoryId], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link('新しい板を作成', ['action' => 'add', $category->id], ['class' => 'button float-right']) ?>
     <h3>板一覧</h3>
     <div class="table-responsive">
         <table class="table table-striped table-hover">

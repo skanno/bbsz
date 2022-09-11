@@ -1,3 +1,10 @@
+<?php
+$this->Breadcrumbs->add([
+    ['title' => 'ホーム', 'url' => '/'],
+    ['title' => h($board->category->name), 'url' => ['action' => 'index', $board->category->id]],
+    ['title' => h($board->name), 'url' => null],
+]);
+?>
 <div class="row">
     <div class="column-responsive column-80">
         <div class="boards view content">

@@ -1,9 +1,11 @@
+<?php
+$this->Breadcrumbs->add([
+    ['title' => 'ホーム', 'url' => '/'],
+    ['title' => h($category->name), 'url' => ['action' => 'index', $category->id]],
+    ['title' => '新しい板を作成', 'url' => null],
+]);
+?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading">板を作成</h4>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="boards form content">
             <?= $this->Form->create($board) ?>

@@ -21,16 +21,14 @@ class BoardsController extends AppController
      */
     public function index(string $categoryId)
     {
-        $this->paginate = [
-            'contain' => ['Categories'],
-        ];
+        $category = TableRegistry::getTableLocator()->get('Categories')->get($categoryId);
         $boards = $this->paginate(
             $this->Boards
                 ->find()
                 ->where(['category_id' => $categoryId])
         );
 
-        $this->set(compact('categoryId', 'boards'));
+        $this->set(compact('category', 'boards'));
     }
 
     /**
@@ -46,7 +44,6 @@ class BoardsController extends AppController
         $board = $this->Boards->get($boardId, [
             'contain' => ['Categories'],
         ]);
-
         $post = $this->Posts->newEmptyEntity();
         if ($this->request->is('post')) {
             $post = $this->Posts->patchEntity($post, $this->request->getData());
