@@ -8,7 +8,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <h4 class="heading">板を作成</h4>
             <?= $this->Html->link(__('List Boards'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
@@ -16,14 +16,13 @@
         <div class="boards form content">
             <?= $this->Form->create($board) ?>
             <fieldset>
-                <legend><?= __('Add Board') ?></legend>
                 <?php
-                    echo $this->Form->control('category_id', ['options' => $categories]);
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('description');
+                    echo $this->Form->hidden('category_id', ['value' => $category->id]);
+                    echo $this->Form->control('name', ['label' => '板の名前']);
+                    echo $this->Form->control('description', ['label' => '説明']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button('作成') ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -1,50 +1,60 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Board $board
- */
-?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Board'), ['action' => 'edit', $board->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Board'), ['action' => 'delete', $board->id], ['confirm' => __('Are you sure you want to delete # {0}?', $board->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Boards'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Board'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="boards view content">
             <h3><?= h($board->name) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Category') ?></th>
-                    <td><?= $board->has('category') ? $this->Html->link($board->category->name, ['controller' => 'Categories', 'action' => 'view', $board->category->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($board->name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($board->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($board->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($board->modified) ?></td>
-                </tr>
-            </table>
             <div class="text">
-                <strong><?= __('Description') ?></strong>
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($board->description)); ?>
+                    <?= $this->Text->autoParagraph(h($board->description)) ?>
                 </blockquote>
             </div>
         </div>
+    </div>
+
+    <?php // ▼▼▼ 投稿フォーム ▼▼▼ ?>
+    <div class="column-responsive column-80">
+        <div class="posts form content">
+            <?= $this->Form->create($post) ?>
+            <fieldset>
+                <?php
+                    echo $this->Form->hidden('board_id', ['value' => $board->id]);
+                    echo $this->Form->control('body', ['label' => '発言']);
+                ?>
+            </fieldset>
+            <?= $this->Form->button('送信') ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+    <?php // ▲▲▲ 投稿フォーム ▲▲▲ ?>
+
+    <?php // ▼▼▼ 投稿一覧 ▼▼▼ ?>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>発言</th>
+                    <th>日時</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($posts as $post): ?>
+                <tr>
+                    <td><?= h($post->body) ?></td>
+                    <td><?= h($post->created) ?></td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+    <?php // ▲▲▲ 投稿一覧 ▲▲▲ ?>
+
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>

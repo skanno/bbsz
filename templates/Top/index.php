@@ -5,7 +5,11 @@
             <ul class="list-group">
                 <?php foreach ($topCategory->categories as $category): ?>
                     <li class="list-group-item">
-                        <a href="/<?= $category->id ?>"><?= $category->name ?></a> (<?= count($category->boards) ?>)
+                        <?= $this->Html->link($category->name, [
+                            'controller' => 'boards',
+                            $category->id,
+                        ]) ?>
+                        (<?= count($category->boards) ?>)
                     </li>
                 <?php endforeach ?>
             </ul>
