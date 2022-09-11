@@ -17,6 +17,7 @@
             <fieldset>
                 <?php
                     echo $this->Form->hidden('board_id', ['value' => $board->id]);
+                    echo $this->Form->control('nick_name', ['label' => 'ニックネーム']);
                     echo $this->Form->control('body', ['label' => '発言']);
                 ?>
             </fieldset>
@@ -31,6 +32,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>ニックネーム</th>
                     <th>発言</th>
                     <th>日時</th>
                 </tr>
@@ -38,6 +40,7 @@
             <tbody>
                 <?php foreach ($posts as $post): ?>
                 <tr>
+                    <td><?= h($post->nick_name) ?></td>
                     <td><?= h($post->body) ?></td>
                     <td><?= h($post->created) ?></td>
                 </tr>

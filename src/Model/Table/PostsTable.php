@@ -64,6 +64,11 @@ class PostsTable extends Table
             ->notEmptyString('board_id');
 
         $validator
+            ->scalar('nick_name')
+            ->requirePresence('nick_name', 'create')
+            ->notEmptyString('nick_name');
+
+        $validator
             ->scalar('body')
             ->requirePresence('body', 'create')
             ->notEmptyString('body');

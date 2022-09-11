@@ -24,3 +24,6 @@ bin/phinx seed:create UserSeeder
 ```bash
 bin/cake migrations seed
 ```
+
+
+bin/cake migrations seed --seed

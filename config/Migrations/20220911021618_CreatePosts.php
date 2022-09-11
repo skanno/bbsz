@@ -23,6 +23,11 @@ class CreatePosts extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('nick_name', 'string', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
+        ]);
         $table->addColumn('created', 'datetime', [
             'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
