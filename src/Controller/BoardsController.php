@@ -51,11 +51,11 @@ class BoardsController extends AppController
         if ($this->request->is('post')) {
             $post = $this->Posts->patchEntity($post, $this->request->getData());
             if ($this->Posts->save($post)) {
-                $this->Flash->success(__('The post has been saved.'));
+                $this->Flash->success('投稿しました。');
 
                 return $this->redirect(['action' => 'view', $boardId]);
             }
-            $this->Flash->error(__('The post could not be saved. Please, try again.'));
+            $this->Flash->error('投稿に失敗しました。');
         }
 
         $posts = $this->paginate(
@@ -80,58 +80,13 @@ class BoardsController extends AppController
         if ($this->request->is('post')) {
             $board = $this->Boards->patchEntity($board, $this->request->getData());
             if ($this->Boards->save($board)) {
-                $this->Flash->success(__('板を作成しました。'));
+                $this->Flash->success('板を作成しました。');
 
                 return $this->redirect(['action' => 'view', $board->id]);
             }
-            $this->Flash->error(__('板の作成に失敗しました。'));
+            $this->Flash->error('板の作成に失敗しました。');
         }
         $categories = $this->Boards->Categories->find('list', ['limit' => 200])->all();
         $this->set(compact('board', 'category'));
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Board id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $board = $this->Boards->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $board = $this->Boards->patchEntity($board, $this->request->getData());
-            if ($this->Boards->save($board)) {
-                $this->Flash->success(__('The board has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The board could not be saved. Please, try again.'));
-        }
-        $categories = $this->Boards->Categories->find('list', ['limit' => 200])->all();
-        $this->set(compact('board', 'categories'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Board id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $board = $this->Boards->get($id);
-        if ($this->Boards->delete($board)) {
-            $this->Flash->success(__('The board has been deleted.'));
-        } else {
-            $this->Flash->error(__('The board could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 }
