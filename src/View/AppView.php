@@ -52,5 +52,4 @@ class AppView extends UIView
 
         $this->initializeUI(['layout' => 'default']);
     }
-
 }

@@ -110,7 +110,7 @@ return [
          */
         '_cake_core_' => [
             'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_core_',
+            'prefix' => 'bbsz_cake_core_',
             'path' => CACHE . 'persistent' . DS,
             'serialize' => true,
             'duration' => '+1 years',
@@ -125,7 +125,7 @@ return [
          */
         '_cake_model_' => [
             'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_model_',
+            'prefix' => 'bbsz_cake_model_',
             'path' => CACHE . 'models' . DS,
             'serialize' => true,
             'duration' => '+1 years',
@@ -139,20 +139,20 @@ return [
          */
         '_cake_routes_' => [
             'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_routes_',
+            'prefix' => 'bbsz_cake_routes_',
             'path' => CACHE,
             'serialize' => true,
             'duration' => '+1 years',
             'url' => env('CACHE_CAKEROUTES_URL', null),
         ],
 
-        'redis' => [
-            'className' => RedisEngine::class,
+        'categories' => [
+            'className' => FileEngine::class,
+            'prefix' => 'bbsz_cake_categories_',
+            'path' => CACHE,
+            'serialize' => true,
             'duration' => '+1 hours',
-            'prefix' => 'cake_redis_',
-            'host' => 'redis',
-            'port' => 6379,
-            'fallback' => 'default',
+            'url' => null,
         ],
     ],
 

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use Cake\Cache\Cache;
+use Cake\ORM\ResultSet;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -10,7 +12,6 @@ use Cake\Validation\Validator;
  * TopCategories Model
  *
  * @property \App\Model\Table\CategoriesTable&\Cake\ORM\Association\HasMany $Categories
- *
  * @method \App\Model\Entity\TopCategory newEmptyEntity()
  * @method \App\Model\Entity\TopCategory newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\TopCategory[] newEntities(array $data, array $options = [])
@@ -24,11 +25,24 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\TopCategory[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\TopCategory[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\TopCategory[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class TopCategoriesTable extends Table
 {
+    /**
+     * キャッシュ設定名
+     *
+     * @var string
+     */
+    private $cacheConfig = 'categories';
+
+    /**
+     * キャッシュキー
+     *
+     * @var string
+     */
+    private $cacheKey = 'categories';
+
     /**
      * Initialize method
      *
@@ -69,5 +83,24 @@ class TopCategoriesTable extends Table
             ->notEmptyString('sort');
 
         return $validator;
+    }
+
+    /**
+     * トップカテゴリを取得します。
+     *
+     * @return \Cake\ORM\ResultSet
+     */
+    public function getTopCategories(): ResultSet
+    {
+        $topCategories = Cache::read($this->cacheKey, $this->cacheConfig);
+        if (!$topCategories) {
+            $topCategories = $this->find()
+                ->contain(['Categories.Boards'])
+                ->order(['TopCategories.id'])
+                ->all();
+            Cache::write($this->cacheKey, $topCategories, $this->cacheConfig);
+        }
+
+        return $topCategories;
     }
 }

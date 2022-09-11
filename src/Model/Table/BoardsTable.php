@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  * Boards Model
  *
  * @property \App\Model\Table\CategoriesTable&\Cake\ORM\Association\BelongsTo $Categories
- *
  * @method \App\Model\Entity\Board newEmptyEntity()
  * @method \App\Model\Entity\Board newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Board[] newEntities(array $data, array $options = [])
@@ -25,7 +24,6 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Board[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\Board[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Board[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class BoardsTable extends Table
