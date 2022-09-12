@@ -22,13 +22,15 @@ class BoardsController extends AppController
     public function index(string $categoryId)
     {
         $category = TableRegistry::getTableLocator()->get('Categories')->get($categoryId);
+        $topCategory = TableRegistry::getTableLocator()->get('TopCategories')->get($category->top_category_id);
+
         $boards = $this->paginate(
             $this->Boards
                 ->find()
                 ->where(['category_id' => $categoryId])
         );
 
-        $this->set(compact('category', 'boards'));
+        $this->set(compact('topCategory', 'category', 'boards'));
     }
 
     /**

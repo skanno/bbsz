@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Table;
 
 use Cake\Cache\Cache;
+use Cake\Core\Configure;
 use Cake\ORM\ResultSet;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -92,13 +93,22 @@ class TopCategoriesTable extends Table
      */
     public function getTopCategories(): ResultSet
     {
-        $topCategories = Cache::read($this->cacheKey, $this->cacheConfig);
-        if (!$topCategories) {
-            $topCategories = $this->find()
+        $getData = function () {
+            return $this->find()
                 ->contain(['Categories.Boards'])
                 ->order(['TopCategories.id'])
                 ->all();
-            Cache::write($this->cacheKey, $topCategories, $this->cacheConfig);
+        };
+
+        $topCategories = null;
+        if (!Configure::read('debug')) {
+            $topCategories = Cache::read($this->cacheKey, $this->cacheConfig);
+            if (!$topCategories) {
+                $topCategories = $getData();
+                Cache::write($this->cacheKey, $topCategories, $this->cacheConfig);
+            }
+        } else {
+            $topCategories = $getData();
         }
 
         return $topCategories;

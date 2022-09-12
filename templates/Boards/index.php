@@ -1,6 +1,7 @@
 <?php
 $this->Breadcrumbs->add([
     ['title' => 'ホーム', 'url' => '/'],
+    ['title' => h($topCategory->name), 'url' => ['controller' => 'categories', 'action' => 'index', $topCategory->id]],
     ['title' => h($category->name), 'url' => null],
 ]);
 ?>
