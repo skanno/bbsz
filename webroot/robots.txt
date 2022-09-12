@@ -1,0 +1,3 @@
+
+User-agent: *
+Sitemap: https://bbsz.s-kanno.net/sitemap.xml
