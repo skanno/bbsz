@@ -43,6 +43,7 @@ return static function (RouteBuilder $routes) {
      * `{action}` markers.
      */
     $routes->setRouteClass(DashedRoute::class);
+    $routes->connect('/sitemap.xml', ['controller' => 'Sitemap','action'=>'index']);
 
     $routes->scope('/', function (RouteBuilder $builder) {
         /*
@@ -57,6 +58,7 @@ return static function (RouteBuilder $routes) {
          */
         $builder->connect('/pages/*', 'Pages::display');
 
+        $builder->connect('/sitemap.xml', ['controller' => 'Sitemap','action'=>'index']);
         /*
          * Connect catchall routes for all controllers.
          *
