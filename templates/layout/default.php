@@ -1,19 +1,18 @@
+<?php
+$title = 'BBSZ | ';
+$crumbs = $this->Breadcrumbs->getCrumbs();
+if (count($crumbs)) {
+    $title .= h(end($crumbs)['title']) . '関連の掲示板';
+} else {
+    $title .=  'みんなの掲示板！';
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        BBSZ |
-        <?php
-        $crumbs = $this->Breadcrumbs->getCrumbs();
-        if (count($crumbs)) {
-            echo h(end($crumbs)['title']);
-        } else {
-            echo 'ホーム';
-        }
-        ?>
-    </title>
+    <title><?= $title ?></title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->meta('description', 'BBSZは楽しい掲示板です。') ?>
     <?= $this->Html->meta('keywords', '掲示板,BBS') ?>
