@@ -15,6 +15,7 @@ $this->Breadcrumbs->add([
                             'controller' => 'boards',
                             $category->id,
                         ]) ?>
+                        (<?= count($category->boards) ?>)
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use Cake\Cache\Cache;
+use Cake\Core\Configure;
+use Cake\ORM\ResultSet;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -29,6 +32,20 @@ use Cake\Validation\Validator;
  */
 class CategoriesTable extends Table
 {
+    /**
+     * キャッシュ設定名
+     *
+     * @var string
+     */
+    private $cacheConfig = 'categories';
+
+    /**
+     * キャッシュキー
+     *
+     * @var string
+     */
+    private $cacheKey = 'categories';
+
     /**
      * Initialize method
      *
@@ -90,5 +107,35 @@ class CategoriesTable extends Table
         $rules->add($rules->existsIn('top_category_id', 'TopCategories'), ['errorField' => 'top_category_id']);
 
         return $rules;
+    }
+
+    /**
+     * カテゴリを取得します。
+     *
+     * @param string $topCategoryId カテゴリーID
+     * @return \Cake\ORM\ResultSet
+     */
+    public function getCategories(string $topCategoryId): ResultSet
+    {
+        $getData = function ($topCategoryId) {
+            return $this->find()
+                ->contain(['Boards'])
+                ->where(['top_category_id' => $topCategoryId])
+                ->all();
+        };
+
+        $categories = null;
+        if (!Configure::read('debug')) {
+            $cacheKey = $this->cacheKey . '_' . $topCategoryId;
+            $categories = Cache::read($cacheKey, $this->cacheConfig);
+            if (!$categories) {
+                $categories = $getData($topCategoryId);
+                Cache::write($cacheKey, $categories, $this->cacheConfig);
+            }
+        } else {
+            $categories = $getData($topCategoryId);
+        }
+
+        return $categories;
     }
 }

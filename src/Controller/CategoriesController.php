@@ -25,8 +25,7 @@ class CategoriesController extends AppController
             ->get('TopCategories')
             ->get($topCategoryId);
         $categories = $this->Categories
-            ->find()
-            ->where(['top_category_id' => $topCategoryId]);
+            ->getCategories($topCategoryId);
 
         $this->set(compact('topCategory', 'categories'));
     }

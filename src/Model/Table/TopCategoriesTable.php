@@ -42,7 +42,7 @@ class TopCategoriesTable extends Table
      *
      * @var string
      */
-    private $cacheKey = 'categories';
+    private $cacheKey = 'topCategories';
 
     /**
      * Initialize method
