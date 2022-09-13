@@ -51,5 +51,6 @@ class AppView extends UIView
         parent::initialize();
 
         $this->initializeUI(['layout' => 'default']);
+        $this->loadHelper('WyriHaximus/MinifyHtml.MinifyHtml');
     }
 }

@@ -27,6 +27,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use WyriHaximus\MinifyHtml\Plugin as MinifyHtmlPlugin;
 
 /**
  * Application setup class.
@@ -66,6 +67,7 @@ class Application extends BaseApplication
         // Load more plugins here
         $this->addPlugin('Migrations');
         $this->addPlugin('BootstrapUI');
+        $this->addPlugin(MinifyHtmlPlugin::class);
     }
 
     /**
