@@ -6,27 +6,23 @@ $this->Breadcrumbs->add([
 ]);
 ?>
 <div class="boards index content">
-    <?= $this->Html->link('新しい板を作成', ['action' => 'add', $category->id], ['class' => 'button float-right']) ?>
-    <h3>板一覧</h3>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <tbody>
-                <?php foreach ($boards as $board): ?>
-                    <tr>
-                        <td>
-                            <?= $this->Html->link(__($board->name), ['action' => 'view', $board->id]) ?>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-                <?php if (!count($boards)): ?>
-                    <tr>
-                        <td>
-                            板はありません。
-                        </td>
-                    </tr>
-                <?php endif ?>
-            </tbody>
-        </table>
+    <div class="m-4">
+        <?= $this->Html->link('新しい板を作成',
+            ['action' => 'add', $category->id],
+            ['class' => 'button float-right p-2']
+        ) ?>
     </div>
+    <ul class="list-group">
+        <?php foreach ($boards as $board): ?>
+            <li class="list-group-item bg-info bg-opacity-25">
+            <?= $this->Html->link(__($board->name), ['action' => 'view', $board->id]) ?>
+            </li>
+        <?php endforeach ?>
+        <?php if (!count($boards)): ?>
+            <li class="list-group-item bg-info bg-opacity-25">
+                板はありません。
+            </li>
+        <?php endif ?>
+    </ul>
     <?= $this->element('paginator') ?>
 </div>

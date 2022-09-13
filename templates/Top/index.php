@@ -7,7 +7,7 @@ $limit = 15;
             <h3 class="m-2"><?= $topCategory->name ?></h3>
             <ul class="list-group">
                 <?php foreach (array_slice($topCategory->categories, 0, $limit) as $category): ?>
-                    <li class="list-group-item">
+                    <li class="list-group-item bg-info bg-opacity-25">
                         <?= $this->Html->link($category->name, [
                             'controller' => 'boards',
                             $category->id,
