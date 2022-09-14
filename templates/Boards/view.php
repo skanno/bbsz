@@ -11,7 +11,7 @@ $this->Breadcrumbs->add([
             <h3><?= h($board->name) ?></h3>
             <div class="text">
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($board->description)) ?>
+                    <?= nl2br($this->Text->autoLink(h($board->description), ['target' => '_blank'])) ?>
                 </blockquote>
             </div>
         </div>
@@ -45,7 +45,7 @@ $this->Breadcrumbs->add([
                     <?php foreach ($posts as $post): ?>
                     <tr class="row">
                         <td class="col-2"><?= h($post->nick_name) ?></td>
-                        <td class="col-8"><?= nl2br(h($post->body)) ?></td>
+                        <td class="col-8"><?= nl2br($this->Text->autoLink(h($post->body), ['target' => '_blank'])) ?></td>
                         <td class="col-2"><?= h($post->created->i18nFormat('yyyy-MM-dd HH:mm:ss')) ?></td>
                     </tr>
                     <?php endforeach ?>
