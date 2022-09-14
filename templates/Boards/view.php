@@ -26,32 +26,20 @@ $this->Breadcrumbs->add([
                 echo $this->Form->control('body', ['label' => '発言']);
             ?>
         </fieldset>
-        <div class="text-center"><?= $this->Form->button('送信', ['class' => 'btn btn-primary']) ?></div>
+        <div class="text-center"><?= $this->Form->button('送信', ['class' => 'btn btn-primary m-3']) ?></div>
     <?= $this->Form->end() ?>
     <?php // ▲▲▲ 投稿フォーム ▲▲▲ ?>
 
     <?php // ▼▼▼ 投稿一覧 ▼▼▼ ?>
     <?php if ($posts->count()): ?>
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr class="row">
-                        <th class="col-2">ニックネーム</th>
-                        <th class="col-8">発言</th>
-                        <th class="col-2">日時</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($posts as $post): ?>
-                    <tr class="row">
-                        <td class="col-2"><?= h($post->nick_name) ?></td>
-                        <td class="col-8"><?= nl2br($this->Text->autoLink(h($post->body), ['target' => '_blank'])) ?></td>
-                        <td class="col-2"><?= h($post->created->i18nFormat('yyyy-MM-dd HH:mm:ss')) ?></td>
-                    </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        </div>
+        <ul class="list-group">
+            <?php foreach ($posts as $post): ?>
+                <li class="list-group-item bg-info bg-opacity-25">
+                    <div><strong><?= h($post->nick_name) ?></strong> <?= h($post->created->i18nFormat('yyyy-MM-dd HH:mm:ss')) ?></div>
+                    <div class="m-2"><?= nl2br($this->Text->autoLink(h($post->body), ['target' => '_blank'])) ?></div>
+                </li>
+            <?php endforeach ?>
+        </ul>
     <?php endif ?>
     <?php // ▲▲▲ 投稿一覧 ▲▲▲ ?>
 
