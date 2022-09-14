@@ -1,5 +1,5 @@
 <?php
-$title = 'BBSZ | ';
+$title = '';
 $crumbs = $this->Breadcrumbs->getCrumbs();
 if (count($crumbs)) {
     $title .= h(end($crumbs)['title']) . '関連の掲示板';
@@ -12,7 +12,7 @@ if (count($crumbs)) {
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $title ?></title>
+    <title>BBSZ | <?= $title ?></title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->meta('description', 'BBSZは楽しい掲示板です。') ?>
     <?= $this->Html->meta('keywords', '掲示板,BBS') ?>
@@ -23,6 +23,14 @@ if (count($crumbs)) {
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@infoBBSZ" />
+    <meta name="twitter:creator" content="@infoBBSZ" />
+    <meta property="og:url" content="https://bbsz.s-kanno.net" />
+    <meta property="og:title" content="<?= $title ?>" />
+    <meta property="og:description" content="他にもいろんな掲示板があるよ！" />
+    <meta property="og:image" content="https://bbsz.s-kanno.net/img/eye-catch.png" />
 </head>
 <body class="container">
     <header class="header text-center p-5">
